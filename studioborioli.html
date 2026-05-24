@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio Dentistico Dr. Stefano Borioli</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --pink: #E8437A;
+    --pink-light: #F4C0D1;
+    --pink-pale: #FBEAF0;
+    --lavender: #B8B4D8;
+    --lavender-light: #EEEDFE;
+    --lavender-mid: #8B87C4;
+    --dark: #2A2A35;
+    --text: #3D3D4A;
+    --muted: #7A7A8A;
+    --surface: #F9F8FC;
+    --white: #FFFFFF;
+    --border: rgba(180, 176, 216, 0.3);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+  }
+
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .logo-mark {
+    position: relative; width: 40px; height: 40px;
+  }
+  .logo-mark svg { width: 40px; height: 40px; }
+  .logo-text { line-height: 1.1; }
+  .logo-text .top { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--pink); font-weight: 600; letter-spacing: 0.02em; }
+  .logo-text .bottom { font-size: 11px; color: var(--lavender-mid); font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+  .nav-links a { text-decoration: none; font-size: 13.5px; color: var(--text); font-weight: 400; letter-spacing: 0.02em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--pink); }
+
+  .btn-primary {
+    background: var(--pink);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    letter-spacing: 0.04em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: #D03468; transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1.5px solid var(--lavender);
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    letter-spacing: 0.04em;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--pink); color: var(--pink); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    padding-top: 72px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--surface);
+    overflow: hidden;
+  }
+
+  .hero-content {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 5% 80px 8%;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--pink); }
+
+  .hero-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 5vw, 68px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--dark);
+    margin-bottom: 24px;
+  }
+  .hero-heading em { font-style: italic; color: var(--pink); }
+
+  .hero-sub {
+    font-size: 15.5px;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 380px;
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+
+  .hero-actions { display: flex; align-items: center; gap: 20px; margin-bottom: 60px; }
+
+  .hero-stats {
+    display: flex; gap: 40px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--dark);
+    line-height: 1;
+  }
+  .stat-num span { color: var(--pink); }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; letter-spacing: 0.04em; }
+
+  .hero-visual {
+    position: relative;
+    background: linear-gradient(145deg, var(--lavender-light) 0%, #f0eef8 60%, var(--pink-pale) 100%);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-visual-inner {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    padding: 80px 40px;
+  }
+
+  .clinic-illustration {
+    width: 100%;
+    max-width: 440px;
+  }
+
+  .floating-card {
+    position: absolute;
+    background: white;
+    border-radius: 16px;
+    padding: 14px 18px;
+    box-shadow: 0 8px 32px rgba(80, 70, 150, 0.15);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .floating-card.left { bottom: 120px; left: -20px; }
+  .floating-card.top { top: 130px; right: 30px; }
+
+  .fc-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .fc-icon.pink { background: var(--pink-pale); }
+  .fc-icon.lavender { background: var(--lavender-light); }
+
+  .fc-text .fc-title { font-size: 12px; font-weight: 500; color: var(--dark); }
+  .fc-text .fc-sub { font-size: 11px; color: var(--muted); }
+
+  /* ABOUT STRIP */
+  #about {
+    padding: 100px 8%;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--pink); }
+
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 3.5vw, 52px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--dark);
+    margin-bottom: 24px;
+  }
+  .section-heading em { color: var(--pink); font-style: italic; }
+
+  .section-body {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.9;
+    font-weight: 300;
+    margin-bottom: 32px;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .value-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .value-card:hover { border-color: var(--lavender); transform: translateY(-2px); }
+
+  .value-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--lavender-light);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px;
+  }
+  .value-icon svg { width: 22px; height: 22px; stroke: var(--lavender-mid); }
+
+  .value-title { font-size: 13px; font-weight: 500; color: var(--dark); margin-bottom: 6px; letter-spacing: 0.02em; }
+  .value-desc { font-size: 13px; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+  /* SERVICES */
+  #servizi {
+    background: var(--dark);
+    padding: 100px 8%;
+  }
+
+  #servizi .section-eyebrow { color: var(--pink-light); }
+  #servizi .section-eyebrow::before { background: var(--pink-light); }
+  #servizi .section-heading { color: white; }
+  #servizi .section-body { color: rgba(255,255,255,0.55); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .service-item {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 36px 30px;
+    transition: background 0.3s;
+    cursor: pointer;
+  }
+  .service-item:hover { background: rgba(232, 67, 122, 0.1); }
+
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--pink);
+    margin-bottom: 20px;
+    display: block;
+    letter-spacing: 0.1em;
+  }
+
+  .service-icon-wrap {
+    width: 48px; height: 48px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    transition: border-color 0.3s;
+  }
+  .service-item:hover .service-icon-wrap { border-color: var(--pink); }
+  .service-icon-wrap svg { width: 22px; height: 22px; stroke: rgba(255,255,255,0.7); }
+
+  .service-name { font-size: 16px; font-weight: 500; color: white; margin-bottom: 10px; }
+  .service-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; font-weight: 300; }
+
+  /* TECNOLOGIA */
+  #tecnologia {
+    padding: 100px 8%;
+    background: var(--surface);
+  }
+
+  .tech-inner {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .tech-list { display: flex; flex-direction: column; gap: 0; }
+
+  .tech-item {
+    display: flex; align-items: flex-start; gap: 20px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tech-item:first-child { border-top: 1px solid var(--border); }
+  .tech-item:hover .tech-item-num { color: var(--pink); }
+
+  .tech-item-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--lavender);
+    min-width: 30px;
+    padding-top: 2px;
+    transition: color 0.2s;
+  }
+  .tech-item-content { flex: 1; }
+  .tech-item-title { font-size: 15px; font-weight: 500; color: var(--dark); margin-bottom: 6px; }
+  .tech-item-desc { font-size: 13.5px; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+  .tech-visual {
+    background: var(--lavender-light);
+    border-radius: 24px;
+    padding: 50px;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 360px;
+  }
+
+  /* TEAM */
+  #team {
+    padding: 100px 8%;
+  }
+
+  .team-header { text-align: center; max-width: 520px; margin: 0 auto 60px; }
+  .team-header .section-eyebrow { justify-content: center; }
+  .team-header .section-eyebrow::before { display: none; }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .team-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .team-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(130, 120, 200, 0.1); }
+
+  .team-photo {
+    width: 100%; aspect-ratio: 4/5;
+    background: var(--lavender-light);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .team-photo-placeholder {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px;
+  }
+
+  .team-avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: var(--lavender);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: white;
+    font-weight: 400;
+  }
+
+  .team-info { padding: 20px 20px 24px; }
+  .team-name { font-size: 15px; font-weight: 500; color: var(--dark); margin-bottom: 4px; }
+  .team-role { font-size: 12px; color: var(--pink); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; }
+
+  /* PER TE */
+  #per-te {
+    background: var(--pink-pale);
+    padding: 100px 8%;
+  }
+
+  .perte-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 60px;
+  }
+
+  .perte-card {
+    background: white;
+    border-radius: 20px;
+    padding: 36px 30px;
+    border: 1px solid rgba(232,67,122,0.1);
+    transition: transform 0.2s;
+  }
+  .perte-card:hover { transform: translateY(-3px); }
+
+  .perte-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pink);
+    background: var(--pink-pale);
+    padding: 4px 12px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+  }
+
+  .perte-heading { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: var(--dark); margin-bottom: 12px; line-height: 1.2; }
+  .perte-text { font-size: 13.5px; color: var(--muted); line-height: 1.8; font-weight: 300; }
+
+  /* CONTATTI */
+  #contatti {
+    padding: 100px 8%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-info { padding-right: 20px; }
+
+  .contact-detail {
+    display: flex; align-items: flex-start; gap: 16px;
+    margin-bottom: 28px;
+  }
+  .contact-detail-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--lavender-light);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-detail-icon svg { width: 20px; height: 20px; stroke: var(--lavender-mid); }
+  .contact-detail-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 4px; }
+  .contact-detail-value { font-size: 15px; color: var(--dark); font-weight: 400; }
+
+  .booking-form {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 40px;
+  }
+
+  .booking-form h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .booking-form p { font-size: 14px; color: var(--muted); margin-bottom: 28px; font-weight: 300; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .form-group label { font-size: 12px; font-weight: 500; color: var(--text); letter-spacing: 0.04em; }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: white;
+    outline: none;
+    transition: border-color 0.2s;
+    font-weight: 300;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--lavender); }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+
+  /* BOOKING CTA */
+  #prenota {
+    background: var(--pink);
+    padding: 80px 8%;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 40px;
+  }
+
+  .prenota-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .prenota-text p { color: rgba(255,255,255,0.75); font-size: 15px; font-weight: 300; max-width: 440px; }
+
+  .btn-white {
+    background: white;
+    color: var(--pink);
+    border: none;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 10px;
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+  .btn-white svg { width: 16px; height: 16px; stroke: var(--pink); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    padding: 60px 8% 32px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand .logo-text .top { color: var(--pink-light); font-size: 18px; }
+  .footer-brand .logo-text .bottom { color: var(--lavender); }
+  .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.8; margin-top: 14px; font-weight: 300; }
+
+  .footer-col h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-bottom: 18px; font-weight: 500; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a { text-decoration: none; color: rgba(255,255,255,0.65); font-size: 13.5px; font-weight: 300; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--pink-light); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.3); font-weight: 300; }
+
+  /* MOBILE MENU */
+  .hamburger { display: none; }
+
+  @media (max-width: 900px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: block; background: none; border: none; cursor: pointer; }
+
+    #hero { grid-template-columns: 1fr; }
+    .hero-visual { min-height: 300px; }
+    #about { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    .perte-grid { grid-template-columns: 1fr; }
+    #contatti { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    #prenota { flex-direction: column; }
+  }
+
+  /* Decorative tooth SVG */
+  .tooth-deco { opacity: 0.08; position: absolute; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="36" height="36" rx="10" fill="#FBEAF0"/>
+      <path d="M18 6C14.5 6 11 8.5 11 12C11 14.5 11.5 16 12 18C12.5 20 13 22 13 25C13 27 14 30 15.5 30C17 30 17.5 28 18 26C18.5 28 19 30 20.5 30C22 30 23 27 23 25C23 22 23.5 20 24 18C24.5 16 25 14.5 25 12C25 8.5 21.5 6 18 6Z" stroke="#E8437A" stroke-width="1.5" fill="none"/>
+    </svg>
+    <div class="logo-text">
+      <div class="top">Studio Dentistico</div>
+      <div class="bottom">Dr. Stefano Borioli</div>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#about">Lo Studio</a></li>
+    <li><a href="#servizi">Servizi</a></li>
+    <li><a href="#tecnologia">Tecnologia</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#per-te">Per Te</a></li>
+    <li><a href="#contatti">Contatti</a></li>
+  </ul>
+
+  <a href="#prenota" class="btn-primary nav-cta">Prenota Ora</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <span class="hero-eyebrow">Studio Dentistico Borioli</span>
+    <h1 class="hero-heading">
+      Ci prendiamo<br>
+      cura del <em>tuo<br>sorriso,</em><br>
+      ogni giorno.
+    </h1>
+    <p class="hero-sub">Siamo una realtà familiare, dove professionalità, tecnologia e attenzione alla persona si incontrano per offrirti cura e serenità.</p>
+    <div class="hero-actions">
+      <a href="#prenota" class="btn-primary">Prenota una visita</a>
+      <a href="#about" class="btn-outline">Scopri di più →</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">20<span>+</span></div>
+        <div class="stat-label">Anni di esperienza</div>
+      </div>
+      <div>
+        <div class="stat-num">4500<span>+</span></div>
+        <div class="stat-label">Pazienti soddisfatti</div>
+      </div>
+      <div>
+        <div class="stat-num">8<span></span></div>
+        <div class="stat-label">Specialisti del team</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-visual-inner">
+      <!-- Illustrated dental chair / clinic scene -->
+      <svg class="clinic-illustration" viewBox="0 0 420 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Room bg -->
+        <rect x="20" y="20" width="380" height="320" rx="24" fill="white" opacity="0.6"/>
+        <!-- Floor line -->
+        <line x1="20" y1="290" x2="400" y2="290" stroke="#B8B4D8" stroke-width="0.8" opacity="0.4"/>
+        <!-- Dental chair base -->
+        <rect x="100" y="220" width="220" height="12" rx="6" fill="#B8B4D8" opacity="0.5"/>
+        <rect x="120" y="200" width="180" height="28" rx="12" fill="#EEEDFE"/>
+        <rect x="130" y="160" width="160" height="48" rx="14" fill="#EEEDFE"/>
+        <!-- Headrest -->
+        <rect x="155" y="140" width="80" height="28" rx="10" fill="#B8B4D8" opacity="0.6"/>
+        <!-- Chair back -->
+        <rect x="135" y="120" width="150" height="50" rx="14" fill="#EEEDFE" opacity="0.8"/>
+        <!-- Arm -->
+        <rect x="290" y="170" width="50" height="10" rx="5" fill="#B8B4D8" opacity="0.5"/>
+        <!-- Light arm -->
+        <path d="M310 60 Q340 100 330 160" stroke="#B8B4D8" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.5"/>
+        <circle cx="330" cy="165" r="18" fill="#FBEAF0" stroke="#E8437A" stroke-width="1.5" opacity="0.7"/>
+        <circle cx="330" cy="165" r="10" fill="#E8437A" opacity="0.3"/>
+        <!-- Tray -->
+        <rect x="60" y="190" width="55" height="8" rx="4" fill="#B8B4D8" opacity="0.4"/>
+        <rect x="65" y="180" width="45" height="14" rx="4" fill="#EEEDFE"/>
+        <!-- Tools on tray -->
+        <line x1="73" y1="183" x2="73" y2="192" stroke="#B8B4D8" stroke-width="2" stroke-linecap="round"/>
+        <line x1="82" y1="183" x2="82" y2="192" stroke="#B8B4D8" stroke-width="2" stroke-linecap="round"/>
+        <line x1="91" y1="183" x2="91" y2="192" stroke="#E8437A" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+        <!-- Monitor on stand -->
+        <rect x="340" y="120" width="50" height="38" rx="6" fill="#2A2A35" opacity="0.9"/>
+        <rect x="343" y="123" width="44" height="30" rx="4" fill="#B8B4D8" opacity="0.4"/>
+        <!-- Heart on monitor -->
+        <path d="M358 133 Q358 130 361 130 Q364 130 364 133 Q364 130 367 130 Q370 130 370 133 Q370 136 364 140 Q358 136 358 133Z" fill="#E8437A" opacity="0.7"/>
+        <rect x="360" y="158" width="10" height="4" rx="2" fill="#2A2A35" opacity="0.5"/>
+        <rect x="350" y="162" width="30" height="6" rx="3" fill="#B8B4D8" opacity="0.3"/>
+        <!-- Plant -->
+        <rect x="370" y="260" width="18" height="28" rx="4" fill="#EEEDFE"/>
+        <ellipse cx="379" cy="250" rx="16" ry="20" fill="#B8B4D8" opacity="0.4"/>
+        <ellipse cx="369" cy="258" rx="10" ry="14" fill="#B8B4D8" opacity="0.3"/>
+        <ellipse cx="389" cy="255" rx="10" ry="14" fill="#B8B4D8" opacity="0.3"/>
+        <!-- Window -->
+        <rect x="30" y="50" width="60" height="80" rx="8" fill="#EEEDFE" opacity="0.5"/>
+        <line x1="60" y1="50" x2="60" y2="130" stroke="white" stroke-width="1.5"/>
+        <line x1="30" y1="90" x2="90" y2="90" stroke="white" stroke-width="1.5"/>
+        <!-- Tooth decoration large -->
+        <path d="M190 300 Q190 296 194 295 Q198 294 200 296 Q202 294 206 295 Q210 296 210 300 Q210 306 200 310 Q190 306 190 300Z" fill="#E8437A" opacity="0.12"/>
+      </svg>
+    </div>
+
+    <div class="floating-card top">
+      <div class="fc-icon lavender">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B87C4" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="fc-text">
+        <div class="fc-title">Sicurezza & Qualità</div>
+        <div class="fc-sub">Standard igienici elevati</div>
+      </div>
+    </div>
+
+    <div class="floating-card left">
+      <div class="fc-icon pink">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8437A" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <div class="fc-text">
+        <div class="fc-title">Cura personalizzata</div>
+        <div class="fc-sub">Per ogni esigenza</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div>
+    <span class="section-eyebrow">Un approccio che parte dalle persone</span>
+    <h2 class="section-heading">La tua salute è la nostra <em>priorità.</em></h2>
+    <p class="section-body">Ascolto, empatia e fiducia sono alla base di ogni percorso di cura. Per questo mettiamo al centro le persone, non solo i trattamenti.</p>
+    <a href="#servizi" class="btn-outline">I nostri valori →</a>
+  </div>
+
+  <div class="values-grid">
+    <div class="value-card">
+      <div class="value-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="value-title">Accoglienza familiare</div>
+      <div class="value-desc">Ti facciamo sentire a casa, dal primo incontro.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div class="value-title">Tecnologia avanzata</div>
+      <div class="value-desc">Strumenti moderni per diagnosi precise e trattamenti efficaci.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <div class="value-title">Cura personalizzata</div>
+      <div class="value-desc">Percorsi su misura per ogni esigenza, a ogni età.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="value-title">Sicurezza e qualità</div>
+      <div class="value-desc">Massima attenzione agli standard igienici e alla tua tranquillità.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIZI -->
+<section id="servizi">
+  <span class="section-eyebrow">I nostri trattamenti</span>
+  <h2 class="section-heading">Tutti i servizi<br>di cui hai bisogno.</h2>
+  <div class="services-grid">
+
+    <div class="service-item">
+      <span class="service-num">01</span>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 2C8.5 2 5 4.5 5 8c0 2.5.5 4 1 6s1 4 1 7c0 2 1 3 2.5 3S11 22.5 11.5 21c.5 1.5 1 3 2.5 3S16 23 16 21c0-3 .5-5 1-7s1-3.5 1-6c0-3.5-3.5-6-6-6z"/></svg>
+      </div>
+      <div class="service-name">Odontoiatria Generale</div>
+      <div class="service-desc">Visite di controllo, pulizia professionale, otturazioni e prevenzione.</div>
+    </div>
+
+    <div class="service-item">
+      <span class="service-num">02</span>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      </div>
+      <div class="service-name">Estetica Dentale</div>
+      <div class="service-desc">Sbiancamento, faccette in porcellana e ricostruzioni estetiche.</div>
+    </div>
+
+    <div class="service-item">
+      <span class="service-num">03</span>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <div class="service-name">Ortodonzia</div>
+      <div class="service-desc">Apparecchi fissi, invisibili e allineatori trasparenti per bambini e adulti.</div>
+    </div>
+
+    <div class="service-item">
+      <span class="service-num">04</span>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      </div>
+      <div class="service-name">Implantologia</div>
+      <div class="service-desc">Impianti dentali con tecniche mini-invasive per risultati duraturi.</div>
+    </div>
+
+    <div class="service-item">
+      <span class="service-num">05</span>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="service-name">Pedodonzia</div>
+      <div class="service-desc">Cure dentali specializzate per bambini in un ambiente accogliente.</div>
+    </div>
+
+    <div class="service-item">
+      <span class="service-num">06</span>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <div class="service-name">Protesi & Conservativa</div>
+      <div class="service-desc">Corone, ponti, protesi fisse e mobili realizzate su misura.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TECNOLOGIA -->
+<section id="tecnologia">
+  <div class="tech-inner">
+    <div>
+      <span class="section-eyebrow">Il nostro approccio</span>
+      <h2 class="section-heading">Tecnologia al<br>servizio della <em>cura.</em></h2>
+      <p class="section-body">Investiamo nelle migliori tecnologie per garantire diagnosi precise, trattamenti meno invasivi e risultati eccellenti.</p>
+
+      <div class="tech-list">
+        <div class="tech-item">
+          <span class="tech-item-num">01</span>
+          <div class="tech-item-content">
+            <div class="tech-item-title">Radiografia digitale 3D (CBCT)</div>
+            <div class="tech-item-desc">Immagini ad alta risoluzione con dose di radiazioni ridotta al minimo.</div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <span class="tech-item-num">02</span>
+          <div class="tech-item-content">
+            <div class="tech-item-title">Scanner intraorale digitale</div>
+            <div class="tech-item-desc">Impronte digitali precise senza materiali spiacevoli o disagio.</div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <span class="tech-item-num">03</span>
+          <div class="tech-item-content">
+            <div class="tech-item-title">Laser dentale</div>
+            <div class="tech-item-desc">Trattamenti mini-invasivi con guarigione più rapida e meno dolore.</div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <span class="tech-item-num">04</span>
+          <div class="tech-item-content">
+            <div class="tech-item-title">Sterilizzazione certificata</div>
+            <div class="tech-item-desc">Protocolli di igiene conformi agli standard europei più elevati.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tech-visual">
+      <svg width="260" height="260" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Central tooth -->
+        <circle cx="130" cy="130" r="90" stroke="#B8B4D8" stroke-width="0.8" stroke-dasharray="4 6" opacity="0.5"/>
+        <circle cx="130" cy="130" r="60" stroke="#E8437A" stroke-width="0.8" stroke-dasharray="4 6" opacity="0.3"/>
+        <path d="M115 95C106 95 98 101 98 110C98 116 98.5 120 100 126C101.5 132 103 138 103 148C103 155 106 164 111.5 164C117 164 118.5 158 120 152C121.5 158 123 164 128.5 164C134 164 137 155 137 148C137 138 138.5 132 140 126C141.5 120 142 116 142 110C142 101 134 95 130 95C126 92 119 92 115 95Z" fill="white" stroke="#E8437A" stroke-width="2"/>
+        <!-- Orbiting dots -->
+        <circle cx="130" cy="40" r="8" fill="#FBEAF0" stroke="#E8437A" stroke-width="1.5"/>
+        <circle cx="200" cy="100" r="6" fill="#EEEDFE" stroke="#B8B4D8" stroke-width="1.5"/>
+        <circle cx="185" cy="185" r="8" fill="#FBEAF0" stroke="#E8437A" stroke-width="1.5"/>
+        <circle cx="60" cy="160" r="6" fill="#EEEDFE" stroke="#B8B4D8" stroke-width="1.5"/>
+        <circle cx="58" cy="90" r="5" fill="#FBEAF0" stroke="#E8437A" stroke-width="1"/>
+        <!-- Labels -->
+        <text x="130" y="36" text-anchor="middle" fill="#B8B4D8" font-size="9" font-family="DM Sans">3D CBCT</text>
+        <text x="214" y="103" fill="#B8B4D8" font-size="9" font-family="DM Sans">Laser</text>
+        <text x="140" y="200" fill="#B8B4D8" font-size="9" font-family="DM Sans">Scanner</text>
+        <text x="18" y="163" fill="#B8B4D8" font-size="9" font-family="DM Sans">Sterile</text>
+        <text x="22" y="90" fill="#B8B4D8" font-size="9" font-family="DM Sans">Digitale</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="team-header">
+    <span class="section-eyebrow">Il nostro team</span>
+    <h2 class="section-heading">Insieme, per farti <em>sorridere.</em></h2>
+    <p class="section-body">Siamo una squadra affiatata, una famiglia che lavora ogni giorno con passione per prendersi cura di te.</p>
+  </div>
+
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-photo">
+        <div class="team-photo-placeholder">
+          <div class="team-avatar">SB</div>
+        </div>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Dr. Stefano Borioli</div>
+        <div class="team-role">Direttore Sanitario</div>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-photo" style="background:#F4C0D1;">
+        <div class="team-photo-placeholder">
+          <div class="team-avatar" style="background: var(--pink);">MC</div>
+        </div>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Dott.ssa M. Conti</div>
+        <div class="team-role">Ortodonzista</div>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-photo" style="background:#EEEDFE;">
+        <div class="team-photo-placeholder">
+          <div class="team-avatar" style="background:#8B87C4;">LR</div>
+        </div>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Dr. L. Rossi</div>
+        <div class="team-role">Implantologia</div>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-photo" style="background:#FDE8F0;">
+        <div class="team-photo-placeholder">
+          <div class="team-avatar" style="background:#D03468;">GF</div>
+        </div>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Dott.ssa G. Ferrari</div>
+        <div class="team-role">Pedodontista</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PER TE -->
+<section id="per-te">
+  <span class="section-eyebrow">Pensato per te</span>
+  <h2 class="section-heading">Il paziente al <em>centro</em><br>di tutto.</h2>
+
+  <div class="perte-grid">
+    <div class="perte-card">
+      <span class="perte-tag">Comfort</span>
+      <div class="perte-heading">Ambiente accogliente e sereno</div>
+      <p class="perte-text">Uno studio pensato per metterti a tuo agio fin dal primo momento, con spazi curati e un'atmosfera rilassante.</p>
+    </div>
+    <div class="perte-card">
+      <span class="perte-tag">Flessibilità</span>
+      <div class="perte-heading">Orari comodi e prenotazione facile</div>
+      <p class="perte-text">Disponibilità mattina e pomeriggio, con prenotazioni online e promemoria automatici via SMS o email.</p>
+    </div>
+    <div class="perte-card">
+      <span class="perte-tag">Finanziamenti</span>
+      <div class="perte-heading">Piani di pagamento personalizzati</div>
+      <p class="perte-text">Rateizzazioni flessibili e convenzioni assicurative per rendere le cure accessibili a tutti.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRENOTA CTA -->
+<section id="prenota">
+  <div class="prenota-text">
+    <h2>Prenota<br>la tua visita.</h2>
+    <p>Scegli la data e l'orario che preferisci. Saremo felici di accoglierti nel nostro studio.</p>
+  </div>
+  <a href="#contatti" class="btn-white">
+    PRENOTA ORA
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </a>
+</section>
+
+<!-- CONTATTI -->
+<section id="contatti">
+  <div class="contact-info">
+    <span class="section-eyebrow">Dove siamo</span>
+    <h2 class="section-heading">Vieni a trovarci.<br><em>Ti aspettiamo.</em></h2>
+    <p class="section-body">Siamo facilmente raggiungibili in centro città, con parcheggio nelle vicinanze.</p>
+
+    <div class="contact-detail">
+      <div class="contact-detail-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div>
+        <div class="contact-detail-label">Indirizzo</div>
+        <div class="contact-detail-value">Via Roma 12, Milano (MI)</div>
+      </div>
+    </div>
+
+    <div class="contact-detail">
+      <div class="contact-detail-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6.06 6.06l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div>
+        <div class="contact-detail-label">Telefono</div>
+        <div class="contact-detail-value">+39 02 1234567</div>
+      </div>
+    </div>
+
+    <div class="contact-detail">
+      <div class="contact-detail-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div>
+        <div class="contact-detail-label">Email</div>
+        <div class="contact-detail-value">info@studioborioli.it</div>
+      </div>
+    </div>
+
+    <div class="contact-detail">
+      <div class="contact-detail-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div>
+        <div class="contact-detail-label">Orari</div>
+        <div class="contact-detail-value">Lun – Ven: 9:00 – 19:00<br><span style="font-size:13px;color:var(--muted);">Sabato: 9:00 – 13:00</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="booking-form">
+    <h3>Richiedi un appuntamento</h3>
+    <p>Compila il modulo e ti ricontattiamo entro 24 ore.</p>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Nome</label>
+        <input type="text" placeholder="Il tuo nome">
+      </div>
+      <div class="form-group">
+        <label>Cognome</label>
+        <input type="text" placeholder="Il tuo cognome">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Telefono</label>
+        <input type="tel" placeholder="+39 000 0000000">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="nome@email.com">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Tipo di visita</label>
+      <select>
+        <option value="">Seleziona un servizio</option>
+        <option>Prima visita gratuita</option>
+        <option>Igiene e pulizia professionale</option>
+        <option>Consulenza ortodonzia</option>
+        <option>Consulenza implantologia</option>
+        <option>Sbiancamento dentale</option>
+        <option>Urgenza</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Note aggiuntive</label>
+      <textarea placeholder="Descrivi brevemente il motivo della visita o eventuali esigenze particolari..."></textarea>
+    </div>
+
+    <button type="submit" class="btn-primary" style="width:100%; padding:14px; font-size:14px;">Invia Richiesta →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-text">
+        <div class="top" style="font-family:'Cormorant Garamond',serif; font-size:20px;">Studio Dentistico</div>
+        <div class="bottom" style="color:var(--lavender); font-size:12px; letter-spacing:0.1em;">Dr. Stefano Borioli</div>
+      </div>
+      <p>Una realtà familiare dove professionalità, tecnologia e attenzione alla persona si incontrano per offrirti il miglior sorriso possibile.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Lo Studio</h4>
+      <ul>
+        <li><a href="#about">Chi siamo</a></li>
+        <li><a href="#team">Il Team</a></li>
+        <li><a href="#tecnologia">Tecnologia</a></li>
+        <li><a href="#per-te">Per te</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Servizi</h4>
+      <ul>
+        <li><a href="#servizi">Odontoiatria Generale</a></li>
+        <li><a href="#servizi">Estetica Dentale</a></li>
+        <li><a href="#servizi">Ortodonzia</a></li>
+        <li><a href="#servizi">Implantologia</a></li>
+        <li><a href="#servizi">Pedodonzia</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contatti</h4>
+      <ul>
+        <li><a href="tel:+390212345678">+39 02 1234567</a></li>
+        <li><a href="mailto:info@studioborioli.it">info@studioborioli.it</a></li>
+        <li><a href="#contatti">Via Roma 12, Milano</a></li>
+        <li><a href="#prenota">Prenota ora</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Studio Dentistico Dr. Stefano Borioli — P.IVA 00000000000</p>
+    <p>Privacy Policy · Cookie Policy</p>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll for all anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Nav shadow on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.boxShadow = window.scrollY > 20 ? '0 4px 24px rgba(80,70,150,0.08)' : 'none';
+  });
+
+  // Form submit placeholder
+  document.querySelector('button[type="submit"]').addEventListener('click', () => {
+    alert('Grazie! Ti ricontatteremo entro 24 ore.');
+  });
+</script>
+</body>
+</html>
