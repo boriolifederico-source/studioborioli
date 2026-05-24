@@ -49,6 +49,13 @@
     display: flex; align-items: center; gap: 10px;
     text-decoration: none;
   }
+  .logo img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
   .logo-mark {
     position: relative; width: 40px; height: 40px;
   }
@@ -594,7 +601,7 @@
     .hamburger { display: block; background: none; border: none; cursor: pointer; }
 
     nav { padding: 0 6%; justify-content: center; height: 90px; }
-    nav .logo img { height: 72px !important; }
+    nav .logo img { height: 64px !important; max-width: 78vw !important; width: auto !important; object-fit: contain !important; }
 
     #hero { grid-template-columns: 1fr; }
     .hero-content { padding: 80px 6% 60px 6%; text-align: center; align-items: center; }
