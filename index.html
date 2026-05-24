@@ -97,17 +97,20 @@
 
   /* HERO */
   #hero {
-    min-height: 100vh;
+    min-height: 80vh;
     padding-top: 80px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: var(--surface);
     overflow: hidden;
   }
 
   .hero-content {
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 80px 5% 80px 8%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center;
+    padding: 80px 8%;
+    max-width: 900px;
   }
 
   .hero-eyebrow {
@@ -135,9 +138,10 @@
     font-size: 15.5px;
     color: var(--muted);
     line-height: 1.8;
-    max-width: 380px;
+    max-width: 480px;
     margin-bottom: 40px;
     font-weight: 300;
+    text-align: center;
   }
 
   .hero-actions { display: flex; align-items: center; gap: 20px; margin-bottom: 60px; }
@@ -689,77 +693,6 @@
             <span style="font-size:13px; color:var(--muted); letter-spacing:0.02em; margin-top:2px;">36+ recensioni Google</span>
           </div>
         </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="hero-visual">
-    <div class="hero-visual-inner">
-      <!-- Illustrated dental chair / clinic scene -->
-      <svg class="clinic-illustration" viewBox="0 0 420 380" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Room bg -->
-        <rect x="20" y="20" width="380" height="320" rx="24" fill="white" opacity="0.6"/>
-        <!-- Floor line -->
-        <line x1="20" y1="290" x2="400" y2="290" stroke="#B8B4D8" stroke-width="0.8" opacity="0.4"/>
-        <!-- Dental chair base -->
-        <rect x="100" y="220" width="220" height="12" rx="6" fill="#B8B4D8" opacity="0.5"/>
-        <rect x="120" y="200" width="180" height="28" rx="12" fill="#EEEDFE"/>
-        <rect x="130" y="160" width="160" height="48" rx="14" fill="#EEEDFE"/>
-        <!-- Headrest -->
-        <rect x="155" y="140" width="80" height="28" rx="10" fill="#B8B4D8" opacity="0.6"/>
-        <!-- Chair back -->
-        <rect x="135" y="120" width="150" height="50" rx="14" fill="#EEEDFE" opacity="0.8"/>
-        <!-- Arm -->
-        <rect x="290" y="170" width="50" height="10" rx="5" fill="#B8B4D8" opacity="0.5"/>
-        <!-- Light arm -->
-        <path d="M310 60 Q340 100 330 160" stroke="#B8B4D8" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.5"/>
-        <circle cx="330" cy="165" r="18" fill="#FBEAF0" stroke="#E8437A" stroke-width="1.5" opacity="0.7"/>
-        <circle cx="330" cy="165" r="10" fill="#E8437A" opacity="0.3"/>
-        <!-- Tray -->
-        <rect x="60" y="190" width="55" height="8" rx="4" fill="#B8B4D8" opacity="0.4"/>
-        <rect x="65" y="180" width="45" height="14" rx="4" fill="#EEEDFE"/>
-        <!-- Tools on tray -->
-        <line x1="73" y1="183" x2="73" y2="192" stroke="#B8B4D8" stroke-width="2" stroke-linecap="round"/>
-        <line x1="82" y1="183" x2="82" y2="192" stroke="#B8B4D8" stroke-width="2" stroke-linecap="round"/>
-        <line x1="91" y1="183" x2="91" y2="192" stroke="#E8437A" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-        <!-- Monitor on stand -->
-        <rect x="340" y="120" width="50" height="38" rx="6" fill="#2A2A35" opacity="0.9"/>
-        <rect x="343" y="123" width="44" height="30" rx="4" fill="#B8B4D8" opacity="0.4"/>
-        <!-- Heart on monitor -->
-        <path d="M358 133 Q358 130 361 130 Q364 130 364 133 Q364 130 367 130 Q370 130 370 133 Q370 136 364 140 Q358 136 358 133Z" fill="#E8437A" opacity="0.7"/>
-        <rect x="360" y="158" width="10" height="4" rx="2" fill="#2A2A35" opacity="0.5"/>
-        <rect x="350" y="162" width="30" height="6" rx="3" fill="#B8B4D8" opacity="0.3"/>
-        <!-- Plant -->
-        <rect x="370" y="260" width="18" height="28" rx="4" fill="#EEEDFE"/>
-        <ellipse cx="379" cy="250" rx="16" ry="20" fill="#B8B4D8" opacity="0.4"/>
-        <ellipse cx="369" cy="258" rx="10" ry="14" fill="#B8B4D8" opacity="0.3"/>
-        <ellipse cx="389" cy="255" rx="10" ry="14" fill="#B8B4D8" opacity="0.3"/>
-        <!-- Window -->
-        <rect x="30" y="50" width="60" height="80" rx="8" fill="#EEEDFE" opacity="0.5"/>
-        <line x1="60" y1="50" x2="60" y2="130" stroke="white" stroke-width="1.5"/>
-        <line x1="30" y1="90" x2="90" y2="90" stroke="white" stroke-width="1.5"/>
-        <!-- Tooth decoration large -->
-        <path d="M190 300 Q190 296 194 295 Q198 294 200 296 Q202 294 206 295 Q210 296 210 300 Q210 306 200 310 Q190 306 190 300Z" fill="#E8437A" opacity="0.12"/>
-      </svg>
-    </div>
-
-    <div class="floating-card top">
-      <div class="fc-icon lavender">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B87C4" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      </div>
-      <div class="fc-text">
-        <div class="fc-title">Sicurezza & Qualità</div>
-        <div class="fc-sub">Standard igienici elevati</div>
-      </div>
-    </div>
-
-    <div class="floating-card left">
-      <div class="fc-icon pink">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8437A" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      </div>
-      <div class="fc-text">
-        <div class="fc-title">Cura personalizzata</div>
-        <div class="fc-sub">Per ogni esigenza</div>
       </div>
     </div>
   </div>
