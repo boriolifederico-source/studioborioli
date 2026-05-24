@@ -263,14 +263,14 @@
 
   /* SERVICES */
   #servizi {
-    background: var(--dark);
+    background: var(--lavender-light);
     padding: 100px 8%;
   }
 
-  #servizi .section-eyebrow { color: var(--pink-light); }
-  #servizi .section-eyebrow::before { background: var(--pink-light); }
-  #servizi .section-heading { color: white; }
-  #servizi .section-body { color: rgba(255,255,255,0.55); }
+  #servizi .section-eyebrow { color: var(--pink); }
+  #servizi .section-eyebrow::before { background: var(--pink); }
+  #servizi .section-heading { color: var(--dark); }
+  #servizi .section-body { color: var(--muted); }
 
   .services-grid {
     display: grid;
@@ -282,13 +282,13 @@
   }
 
   .service-item {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: white;
+    border: 1px solid var(--border);
     padding: 36px 30px;
     transition: background 0.3s;
     cursor: pointer;
   }
-  .service-item:hover { background: rgba(232, 67, 122, 0.1); }
+  .service-item:hover { background: var(--pink-pale); }
 
   .service-num {
     font-family: 'Cormorant Garamond', serif;
@@ -301,17 +301,17 @@
 
   .service-icon-wrap {
     width: 48px; height: 48px;
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 1px solid var(--border);
     border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
     margin-bottom: 20px;
     transition: border-color 0.3s;
   }
   .service-item:hover .service-icon-wrap { border-color: var(--pink); }
-  .service-icon-wrap svg { width: 22px; height: 22px; stroke: rgba(255,255,255,0.7); }
+  .service-icon-wrap svg { width: 22px; height: 22px; stroke: var(--lavender-mid); }
 
-  .service-name { font-size: 16px; font-weight: 500; color: white; margin-bottom: 10px; }
-  .service-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; font-weight: 300; }
+  .service-name { font-size: 16px; font-weight: 500; color: var(--dark); margin-bottom: 10px; }
+  .service-desc { font-size: 13px; color: var(--muted); line-height: 1.7; font-weight: 300; }
 
   /* TECNOLOGIA */
   #tecnologia {
