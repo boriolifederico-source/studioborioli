@@ -1,12 +1,12 @@
 # Studio Dentistico Dr. Stefano Borioli
 
-Sito web ufficiale dello Studio Dentistico Dr. Stefano Borioli a Intra (VB).
+Sito web ufficiale dello Studio Dentistico Dr. Stefano Borioli a Verbania (VB).
 
 🌐 **Live:** [boriolifederico-source.github.io/studioborioli](https://boriolifederico-source.github.io/studioborioli)
 
 ## Info Studio
 
-- 📍 Via S. Vittore, 11, 28921 Intra VB
+- 📍 Via S. Vittore, 11, 28921 Verbania (VB)
 - 📞 +39 0323 52102
 - ✉️ studio.borioli@libero.it
 - ⭐ 5.0/5.0 su Google (36+ recensioni)

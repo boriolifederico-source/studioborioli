@@ -22,10 +22,10 @@ GitHub Pages serves `index.html` from the `main` branch root.
 ## Clinic information (canonical)
 
 - **Name:** Studio Dentistico Dr. Stefano Borioli
-- **Address:** Via S. Vittore, 11, 28921 Intra VB, Italy
+- **Address:** Via S. Vittore, 11, 28921 Verbania (VB), Italy
 - **Phone:** +39 0323 52102
 - **Email:** studio.borioli@libero.it
-- **Province:** Verbano-Cusio-Ossola
+- **Province:** Verbano-Cusio-Ossola (Verbania)
 
 ### Opening hours (continuous, no lunch break unless stated)
 - Lun (Mon): 9:00–19:00
@@ -88,7 +88,7 @@ GitHub Pages serves `index.html` from the `main` branch root.
 4. **Clinic Photo Banner** (`#clinic-photo`) — parallax `clinic.jpg` with gradient overlay and overlay text
 5. **Servizi** (`#servizi`) — lavender-light background, 6 white cards: Odontoiatria Generale, Estetica Dentale, Ortodonzia, Implantologia, Pedodonzia, Protesi & Conservativa
 6. **Tecnologia** (`#tecnologia`) — single centered column, numbered list 01–04 (IO Scanner, Microscopio, EMS Prophy, Sterilizzazione)
-7. **Team** (`#team`) — 4-card grid with initials avatars (placeholders for real photos)
+7. **Team** (`#team`) — **single centered card** for Dr. Stefano Borioli only (Direttore Sanitario). No other team members.
 8. **Testimonials** (`#testimonials`) — carousel of 5 real Google reviews (Stephen & Elena, Paolo Oggioni, Cristina Gomez, Veronica Ruppen, Marinella Testori with LOCAL GUIDE badge); auto-plays every 7s; arrow + dot controls
 9. **Per Te** (`#per-te`) — pink-pale background, 3 cards (Comfort, Flessibilità, Finanziamenti)
 10. **Prenota CTA** (`#prenota`) — pink banner with "PRENOTA ORA" button
