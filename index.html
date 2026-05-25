@@ -793,9 +793,9 @@
 
 <!-- CLINIC PHOTO BANNER -->
 <section id="clinic-photo" style="position:relative; min-height:520px; display:flex; align-items:center; justify-content:center; padding: 100px 8%; overflow:hidden; background:#2A2A35;">
-  <!-- Image as positioned element for smooth scrolling (no background-attachment: fixed) -->
-  <div aria-hidden="true" style="position:absolute; inset:0; overflow:hidden; will-change: transform; z-index:0;">
-    <img src="clinic.jpg" alt="" style="position:absolute; top:-10%; left:0; width:100%; height:120%; object-fit:cover; object-position:center 40%; display:block; transform: translate3d(0,0,0); will-change: transform;">
+  <!-- GPU-accelerated parallax: image scrolls slower than the page -->
+  <div aria-hidden="true" style="position:absolute; inset:0; overflow:hidden; z-index:0;">
+    <img id="parallax-clinic" src="clinic.jpg" alt="" style="position:absolute; top:-20%; left:0; width:100%; height:140%; object-fit:cover; object-position:center 40%; display:block; transform: translate3d(0,0,0); will-change: transform; backface-visibility: hidden;">
     <div style="position:absolute; inset:0; background: linear-gradient(135deg, rgba(42,42,53,0.55) 0%, rgba(232,67,122,0.25) 100%); pointer-events:none;"></div>
   </div>
   <div style="max-width:680px; text-align:center; color:white; position:relative; z-index:2;">
@@ -1937,6 +1937,47 @@
   } else {
     initLangToggle();
   }
+
+  // Smooth GPU-accelerated parallax for the clinic photo
+  // Uses requestAnimationFrame to throttle and translate3d to keep it on GPU
+  (function() {
+    const img = document.getElementById('parallax-clinic');
+    const section = document.getElementById('clinic-photo');
+    if (!img || !section) return;
+
+    // Disable on mobile (small screens) and on reduced-motion preference
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || window.innerWidth < 700) return;
+
+    let ticking = false;
+    const speed = 0.35; // image moves at 35% of scroll speed (subtle, like real parallax)
+
+    function update() {
+      const rect = section.getBoundingClientRect();
+      // Only compute when the section is anywhere near the viewport
+      if (rect.bottom < -200 || rect.top > window.innerHeight + 200) {
+        ticking = false;
+        return;
+      }
+      // Distance of section center from viewport center
+      const sectionCenter = rect.top + rect.height / 2;
+      const viewportCenter = window.innerHeight / 2;
+      const offset = (sectionCenter - viewportCenter) * speed;
+      img.style.transform = 'translate3d(0,' + (-offset) + 'px, 0)';
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update(); // initial position
+  })();
 </script>
 
 <!-- Floating quick-action buttons -->
