@@ -775,22 +775,53 @@
 </style>
 <script>
 (function() {
+  const viewport = document.querySelector('#lo-studio .studio-viewport');
   const track = document.getElementById('studio-track');
-  if (!track) return;
+  if (!track || !viewport) return;
   const total = track.children.length - 1; // last child is the clone of the first photo
-  let i = 0;
-  setInterval(() => {
+  let i = 0, timer = null, drag = null, dx = 0;
+  viewport.style.touchAction = 'pan-y';
+
+  function setPos(px, animate) {
+    track.style.transition = animate ? 'transform 0.8s cubic-bezier(0.65,0,0.35,1)' : 'none';
+    track.style.transform = 'translateX(calc(-' + (i * 100) + '% + ' + px + 'px))';
+  }
+  function next() {
     i++;
-    track.style.transition = 'transform 1s cubic-bezier(0.65,0,0.35,1)';
-    track.style.transform = 'translateX(-' + (i * 100) + '%)';
+    setPos(0, true);
     if (i === total) {
-      setTimeout(() => {
-        track.style.transition = 'none';
-        i = 0;
-        track.style.transform = 'translateX(0)';
-      }, 1050);
+      setTimeout(() => { i = 0; setPos(0, false); }, 850);
     }
-  }, 4000);
+  }
+  function start() { clearInterval(timer); timer = setInterval(next, 4000); }
+  function pause(ms) { clearInterval(timer); setTimeout(start, ms); }
+
+  viewport.addEventListener('pointerdown', e => {
+    drag = { x: e.clientX, w: viewport.offsetWidth };
+    dx = 0;
+    clearInterval(timer);
+    viewport.setPointerCapture(e.pointerId);
+  });
+  viewport.addEventListener('pointermove', e => {
+    if (!drag) return;
+    dx = e.clientX - drag.x;
+    setPos(dx, false);
+  });
+  function endDrag() {
+    if (!drag) return;
+    const threshold = drag.w * 0.15;
+    if (dx < -threshold && i < total) i++;
+    else if (dx > threshold && i > 0) i--;
+    drag = null; dx = 0;
+    setPos(0, true);
+    if (i === total) setTimeout(() => { i = 0; setPos(0, false); }, 850);
+    pause(4000);
+  }
+  viewport.addEventListener('pointerup', endDrag);
+  viewport.addEventListener('pointercancel', endDrag);
+
+  setPos(0, false);
+  start();
 })();
 </script>
 
