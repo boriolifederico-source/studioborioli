@@ -765,6 +765,10 @@
       <div class="studio-slide"><img src="studio-1.jpg" alt="Lo studio dentistico Dr. Stefano Borioli, Verbania" loading="lazy"></div><div class="studio-slide"><img src="studio-2.jpg" alt="Interno dello studio dentistico Borioli" loading="lazy"></div><div class="studio-slide"><img src="studio-3.jpg" alt="Ambienti dello studio dentistico Borioli" loading="lazy"></div><div class="studio-slide" aria-hidden="true"><img src="studio-1.jpg" alt="" loading="lazy"></div>
     </div>
   </div>
+  <div style="display:flex; justify-content:center; gap:28px; margin-top:28px;">
+    <button id="studio-prev" aria-label="Foto precedente" style="width:48px; height:48px; border-radius:50%; border:1.5px solid var(--lavender); background:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <button id="studio-next" aria-label="Foto successiva" style="width:48px; height:48px; border-radius:50%; border:1.5px solid var(--lavender); background:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
 </section>
 
 <style>
@@ -819,6 +823,14 @@
   }
   viewport.addEventListener('pointerup', endDrag);
   viewport.addEventListener('pointercancel', endDrag);
+
+  function prevPhoto() {
+    if (i === 0) { i = total; setPos(0, false); }
+    i--;
+    setPos(0, true);
+  }
+  document.getElementById('studio-prev').addEventListener('click', () => { prevPhoto(); pause(4000); });
+  document.getElementById('studio-next').addEventListener('click', () => { next(); pause(4000); });
 
   setPos(0, false);
   start();
