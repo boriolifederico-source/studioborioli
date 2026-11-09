@@ -1052,8 +1052,6 @@
   });
   document.getElementById('tech-prev').addEventListener('click', () => { stopAuto(); go(cur - 1); });
   document.getElementById('tech-next').addEventListener('click', () => { stopAuto(); go(cur + 1); });
-  // any touch or click on the slider stops the automatic movement
-  ['touchstart', 'mousedown', 'wheel'].forEach(ev => slider.addEventListener(ev, stopAuto, { passive: true }));
   go(0);
   timer = setInterval(() => go(cur + 1), 6000);
 })();
