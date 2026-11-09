@@ -1078,22 +1078,51 @@
   if (!track) return;
   const slides = Array.from(track.children).filter(el => el.tagName === 'SECTION');
   const n = slides.length;
-  let cur = 0, timer = null;
-  function stopAuto() { clearInterval(timer); timer = null; }
-  function go(i) {
-    cur = (i + n) % n;
-    track.style.transform = 'translateX(-' + (cur * 100) + '%)';
+  let cur = 0, timer = null, drag = null, dx = 0;
+  slider.style.touchAction = 'pan-y';
+
+  function setPos(px, animate) {
+    track.style.transition = animate ? 'transform 0.9s cubic-bezier(0.65,0,0.35,1)' : 'none';
+    track.style.transform = 'translateX(calc(-' + (cur * 100) + '% + ' + px + 'px))';
     Array.from(dotsWrap.children).forEach((d, k) => d.classList.toggle('active', k === cur));
   }
+  function go(i) { cur = (i + n) % n; setPos(0, true); }
+  function stopAuto() { clearInterval(timer); timer = null; }
+  function pause(ms) { stopAuto(); setTimeout(() => { timer = setInterval(() => go(cur + 1), 6000); }, ms); }
+
   slides.forEach((_, i) => {
     const b = document.createElement('button');
     b.setAttribute('aria-label', 'Tecnologia ' + (i + 1));
-    b.addEventListener('click', () => { stopAuto(); go(i); });
+    b.addEventListener('click', () => { go(i); pause(6000); });
     dotsWrap.appendChild(b);
   });
-  document.getElementById('tech-prev').addEventListener('click', () => { stopAuto(); go(cur - 1); });
-  document.getElementById('tech-next').addEventListener('click', () => { stopAuto(); go(cur + 1); });
-  go(0);
+  document.getElementById('tech-prev').addEventListener('click', () => { go(cur - 1); stopAuto(); });
+  document.getElementById('tech-next').addEventListener('click', () => { go(cur + 1); stopAuto(); });
+
+  // swipe with finger or mouse
+  slider.addEventListener('pointerdown', e => {
+    drag = { x: e.clientX, w: slider.offsetWidth };
+    dx = 0; stopAuto();
+    slider.setPointerCapture(e.pointerId);
+  });
+  slider.addEventListener('pointermove', e => {
+    if (!drag) return;
+    dx = e.clientX - drag.x;
+    setPos(dx, false);
+  });
+  function endDrag() {
+    if (!drag) return;
+    const t = drag.w * 0.15;
+    if (dx < -t) cur = (cur + 1) % n;
+    else if (dx > t) cur = (cur - 1 + n) % n;
+    drag = null; dx = 0;
+    setPos(0, true);
+    pause(6000);
+  }
+  slider.addEventListener('pointerup', endDrag);
+  slider.addEventListener('pointercancel', endDrag);
+
+  setPos(0, false);
   timer = setInterval(() => go(cur + 1), 6000);
 })();
 </script>
