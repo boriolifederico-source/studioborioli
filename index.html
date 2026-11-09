@@ -1087,7 +1087,7 @@
   }
   function go(i) { cur = (i + n) % n; setPos(0, true); }
   function stopAuto() { clearInterval(timer); timer = null; }
-  function pause(ms) { stopAuto(); setTimeout(() => { timer = setInterval(() => go(cur + 1), 6000); }, ms); }
+  function pause(ms) { stopAuto(); }
 
   slides.forEach((_, i) => {
     const b = document.createElement('button');
@@ -1122,7 +1122,6 @@
   slider.addEventListener('pointercancel', endDrag);
 
   setPos(0, false);
-  timer = setInterval(() => go(cur + 1), 6000);
 })();
 </script>
 
