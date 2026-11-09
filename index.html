@@ -1473,7 +1473,8 @@
   });
 
   // Form submit placeholder
-  document.querySelector('button[type="submit"]').addEventListener('click', () => {
+  const submitBtn = document.querySelector('button[type="submit"]');
+  if (submitBtn) submitBtn.addEventListener('click', () => {
     alert('Grazie! Ti ricontatteremo entro 24 ore.');
   });
 
