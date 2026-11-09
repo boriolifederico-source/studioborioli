@@ -298,13 +298,13 @@
   }
 
   .service-item {
-    background: #E4238F;
-    border: 1px solid #E4238F;
-    padding: 42px 36px;
+    background: white;
+    border: 1px solid var(--border);
+    padding: 36px 30px;
     transition: background 0.3s;
     cursor: pointer;
   }
-  .service-item:hover { background: #C81C7E; }
+  .service-item:hover { background: var(--pink-pale); }
 
   .service-num {
     font-family: 'Poppins', sans-serif;
@@ -326,8 +326,8 @@
   .service-item:hover .service-icon-wrap { border-color: var(--pink); }
   .service-icon-wrap svg { width: 22px; height: 22px; stroke: var(--lavender-mid); }
 
-  .service-name { font-size: 20px; font-weight: 700; color: #000; margin-bottom: 12px; }
-  .service-desc { font-size: 16.5px; color: #000; line-height: 1.6; font-weight: 600; }
+  .service-name { font-size: 16px; font-weight: 500; color: var(--dark); margin-bottom: 10px; }
+  .service-desc { font-size: 16.5px; color: var(--muted); line-height: 1.7; font-weight: 500; }
 
   /* TECNOLOGIA */
   #tecnologia {
@@ -647,8 +647,8 @@
     .section-body { font-size: 14px; }
     .value-title { font-size: 12.5px; }
     .value-desc { font-size: 12.5px; }
-    .service-name { font-size: 18px; font-weight: 700; color:#000; }
-    .service-desc { font-size: 14.5px; font-weight: 600; color:#000; }
+    .service-name { font-size: 15px; }
+    .service-desc { font-size: 12.5px; }
     .tech-item-title { font-size: 14px; }
     .tech-item-desc { font-size: 12.5px; }
     .team-name { font-size: 14px; }
@@ -827,12 +827,12 @@
       <div class="service-desc" data-i18n="serv.2.desc">Sbiancamento, faccette in porcellana e ricostruzioni estetiche.</div>
     </div>
 
-    <div class="service-item">
+    <div class="service-item" style="background:linear-gradient(rgba(255,255,255,0.55),rgba(255,255,255,0.55)), url('ortho.png') center/cover no-repeat; position:relative;">
       <div class="service-name" data-i18n="serv.3.name">Ortodonzia</div>
       <div class="service-desc" data-i18n="serv.3.desc">Apparecchi fissi, invisibili e allineatori trasparenti per bambini e adulti.</div>
     </div>
 
-    <div class="service-item" style="background:linear-gradient(rgba(228,35,143,0.62),rgba(228,35,143,0.62)), url('implant.jpg') center/cover no-repeat; position:relative;">
+    <div class="service-item" style="background:linear-gradient(rgba(255,255,255,0.55),rgba(255,255,255,0.55)), url('implant.jpg') center/cover no-repeat; position:relative;">
       <div class="service-name" data-i18n="serv.4.name">Implantologia</div>
       <div class="service-desc" data-i18n="serv.4.desc">Impianti dentali con tecniche mini-invasive per risultati duraturi.</div>
     </div>
