@@ -1017,7 +1017,11 @@
 <!-- TEAM -->
 
   </div>
-  <div id="tech-dots" style="display:flex; justify-content:center; gap:10px; padding:22px 0; background:#fff;"></div>
+  <div id="tech-controls" style="display:flex; align-items:center; justify-content:center; gap:22px; padding:22px 0; background:#fff;">
+    <button id="tech-prev" aria-label="Precedente" style="width:44px; height:44px; border-radius:50%; border:1.5px solid var(--lavender); background:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div id="tech-dots" style="display:flex; gap:10px;"></div>
+    <button id="tech-next" aria-label="Successivo" style="width:44px; height:44px; border-radius:50%; border:1.5px solid var(--lavender); background:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
 </div>
 
 <style>
@@ -1029,26 +1033,29 @@
 (function() {
   const track = document.getElementById('tech-track');
   const dotsWrap = document.getElementById('tech-dots');
+  const slider = document.getElementById('tech-slider');
   if (!track) return;
   const slides = Array.from(track.children).filter(el => el.tagName === 'SECTION');
   const n = slides.length;
-  let cur = 0, timer;
-  slides.forEach((_, i) => {
-    const b = document.createElement('button');
-    b.setAttribute('aria-label', 'Tecnologia ' + (i + 1));
-    b.addEventListener('click', () => { go(i); restart(); });
-    dotsWrap.appendChild(b);
-  });
+  let cur = 0, timer = null;
+  function stopAuto() { clearInterval(timer); timer = null; }
   function go(i) {
     cur = (i + n) % n;
     track.style.transform = 'translateX(-' + (cur * 100) + '%)';
     Array.from(dotsWrap.children).forEach((d, k) => d.classList.toggle('active', k === cur));
   }
-  function restart() { clearInterval(timer); timer = setInterval(() => go(cur + 1), 6000); }
-  const slider = document.getElementById('tech-slider');
-  slider.addEventListener('mouseenter', () => clearInterval(timer));
-  slider.addEventListener('mouseleave', restart);
-  go(0); restart();
+  slides.forEach((_, i) => {
+    const b = document.createElement('button');
+    b.setAttribute('aria-label', 'Tecnologia ' + (i + 1));
+    b.addEventListener('click', () => { stopAuto(); go(i); });
+    dotsWrap.appendChild(b);
+  });
+  document.getElementById('tech-prev').addEventListener('click', () => { stopAuto(); go(cur - 1); });
+  document.getElementById('tech-next').addEventListener('click', () => { stopAuto(); go(cur + 1); });
+  // any touch or click on the slider stops the automatic movement
+  ['touchstart', 'mousedown', 'wheel'].forEach(ev => slider.addEventListener(ev, stopAuto, { passive: true }));
+  go(0);
+  timer = setInterval(() => go(cur + 1), 6000);
 })();
 </script>
 
