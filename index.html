@@ -791,6 +791,7 @@
     track.style.transform = 'translateX(calc(-' + (i * 100) + '% + ' + px + 'px))';
   }
   function next() {
+    if (i >= total) return;
     i++;
     setPos(0, true);
     if (i === total) {
