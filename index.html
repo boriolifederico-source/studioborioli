@@ -757,26 +757,70 @@
 
 <!-- ABOUT -->
 <section id="lo-studio" style="padding:100px 8%; background:var(--surface);">
-  <div style="text-align:center; max-width:640px; margin:0 auto 56px;">
+  <div style="text-align:center; max-width:640px; margin:0 auto 48px;">
     <span class="section-eyebrow" style="justify-content:center;">Lo Studio</span>
   </div>
-  <div class="studio-gallery">
-    <div class="studio-tile"><img src="studio-1.jpg" alt="Lo studio dentistico Dr. Stefano Borioli, Verbania" loading="lazy"></div>
-    <div class="studio-tile"><img src="studio-2.jpg" alt="Interno dello studio dentistico Borioli" loading="lazy"></div>
-    <div class="studio-tile"><img src="studio-3.jpg" alt="Ambienti dello studio dentistico Borioli" loading="lazy"></div>
+  <div style="position:relative; max-width:1200px; margin:0 auto;">
+    <div id="studio-track" class="studio-track">
+      <div class="studio-tile"><img src="studio-1.jpg" alt="Lo studio dentistico Dr. Stefano Borioli, Verbania" loading="lazy"></div>
+      <div class="studio-tile"><img src="studio-2.jpg" alt="Interno dello studio dentistico Borioli" loading="lazy"></div>
+      <div class="studio-tile"><img src="studio-3.jpg" alt="Ambienti dello studio dentistico Borioli" loading="lazy"></div>
+    </div>
+  </div>
+  <div style="display:flex; align-items:center; justify-content:center; gap:22px; margin-top:32px;">
+    <button id="studio-prev" aria-label="Precedente" style="width:44px; height:44px; border-radius:50%; border:1.5px solid var(--lavender); background:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div id="studio-dots" style="display:flex; gap:10px;"></div>
+    <button id="studio-next" aria-label="Successivo" style="width:44px; height:44px; border-radius:50%; border:1.5px solid var(--lavender); background:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
   </div>
 </section>
 
 <style>
-  .studio-gallery { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; max-width:1200px; margin:0 auto; }
-  .studio-tile { border-radius:24px; overflow:hidden; aspect-ratio:4/5; box-shadow:0 16px 40px rgba(80,70,150,0.12); }
-  .studio-tile img { width:100%; height:100%; object-fit:cover; display:block; transition: transform .6s ease; }
-  .studio-tile:hover img { transform: scale(1.04); }
+  .studio-track { display:flex; gap:24px; overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+  .studio-track::-webkit-scrollbar { display:none; }
+  .studio-tile { flex:0 0 calc((100% - 48px) / 3); scroll-snap-align:start; border-radius:24px; overflow:hidden; aspect-ratio:4/5; box-shadow:0 16px 40px rgba(80,70,150,0.12); }
+  .studio-tile img { width:100%; height:100%; object-fit:cover; display:block; }
+  #studio-dots button { width:9px; height:9px; border-radius:50%; border:none; padding:0; cursor:pointer; background:var(--lavender); opacity:0.5; transition: all .3s; }
+  #studio-dots button.active { background:var(--pink); opacity:1; width:26px; border-radius:5px; }
   @media (max-width: 760px) {
-    .studio-gallery { grid-template-columns:1fr; gap:18px; }
-    .studio-tile { aspect-ratio:4/3; }
+    .studio-tile { flex:0 0 78%; aspect-ratio:4/5; }
   }
 </style>
+<script>
+(function() {
+  const track = document.getElementById('studio-track');
+  const dotsWrap = document.getElementById('studio-dots');
+  if (!track) return;
+  const tiles = Array.from(track.children);
+  let timer = null;
+  function step() { const t = tiles[0]; return t.offsetWidth + 24; }
+  function pageCount() { return tiles.length; }
+  function idx() { return Math.round(track.scrollLeft / step()); }
+  function goTo(i) {
+    const n = pageCount();
+    const target = ((i % n) + n) % n;
+    track.scrollTo({ left: target * step(), behavior: 'smooth' });
+    updateDots(target);
+  }
+  function updateDots(active) {
+    Array.from(dotsWrap.children).forEach((d, k) => d.classList.toggle('active', k === active));
+  }
+  function stopAuto() { clearInterval(timer); timer = null; }
+  tiles.forEach((_, i) => {
+    const b = document.createElement('button');
+    b.setAttribute('aria-label', 'Foto ' + (i + 1));
+    b.addEventListener('click', () => { stopAuto(); goTo(i); });
+    dotsWrap.appendChild(b);
+  });
+  document.getElementById('studio-prev').addEventListener('click', () => { stopAuto(); goTo(idx() - 1); });
+  document.getElementById('studio-next').addEventListener('click', () => { stopAuto(); goTo(idx() + 1); });
+  track.addEventListener('scroll', () => updateDots(idx()), { passive: true });
+  updateDots(0);
+  timer = setInterval(() => {
+    const next = idx() + 1;
+    goTo(next >= pageCount() ? 0 : next);
+  }, 4500);
+})();
+</script>
 
 <!-- CLINIC PHOTO BANNER -->
 <section id="clinic-photo" style="position:relative; min-height:520px; display:flex; align-items:center; justify-content:center; padding: 100px 8%; overflow:hidden; background:#2A2A35;">
