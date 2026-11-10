@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://boriolifederico-source.github.io/studioborioli/sitemap.xml
+Sitemap: https://studioborioli.it/sitemap.xml
