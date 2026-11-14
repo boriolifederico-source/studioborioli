@@ -1634,51 +1634,62 @@
     alert('Grazie! Ti ricontatteremo entro 24 ore.');
   });
 
-  // Testimonials carousel
+  // Testimonials carousel (arrows, dots, autoplay, and swipe on phones)
   (function() {
+    const track = document.getElementById('testimonial-track');
     const slides = document.getElementById('testimonial-slides');
     const dots = document.querySelectorAll('.t-dot');
     const prevBtn = document.getElementById('testimonial-prev');
     const nextBtn = document.getElementById('testimonial-next');
-    if (!slides) return;
+    if (!slides || !track) return;
 
     const total = dots.length;
-    let current = 0;
-    let autoplay;
+    let current = 0, autoplay = null, drag = null, dx = 0;
+    track.style.touchAction = 'pan-y';
 
-    function go(i) {
-      current = (i + total) % total;
-      slides.style.transform = `translateX(-${current * 100}%)`;
+    function setPos(px, animate) {
+      slides.style.transition = animate ? 'transform 0.6s cubic-bezier(0.65,0,0.35,1)' : 'none';
+      slides.style.transform = 'translateX(calc(-' + (current * 100) + '% + ' + px + 'px))';
       dots.forEach((d, idx) => {
-        if (idx === current) {
-          d.style.background = 'var(--pink)';
-          d.style.opacity = '1';
-          d.style.width = '24px';
-          d.style.borderRadius = '4px';
-        } else {
-          d.style.background = 'var(--lavender)';
-          d.style.opacity = '0.4';
-          d.style.width = '8px';
-          d.style.borderRadius = '50%';
-        }
+        const on = idx === current;
+        d.style.background = on ? 'var(--pink)' : 'var(--lavender)';
+        d.style.opacity = on ? '1' : '0.4';
+        d.style.width = on ? '24px' : '8px';
+        d.style.borderRadius = on ? '4px' : '50%';
       });
     }
+    function go(i) { current = (i + total) % total; setPos(0, true); }
+    function stopAuto() { clearInterval(autoplay); autoplay = null; }
+    function restart() { stopAuto(); autoplay = setInterval(() => go(current + 1), 7000); }
 
-    function startAutoplay() {
-      autoplay = setInterval(() => go(current + 1), 7000);
-    }
-    function resetAutoplay() {
-      clearInterval(autoplay);
-      startAutoplay();
-    }
+    prevBtn.addEventListener('click', () => { go(current - 1); restart(); });
+    nextBtn.addEventListener('click', () => { go(current + 1); restart(); });
+    dots.forEach(dot => dot.addEventListener('click', () => { go(parseInt(dot.dataset.i)); restart(); }));
 
-    prevBtn.addEventListener('click', () => { go(current - 1); resetAutoplay(); });
-    nextBtn.addEventListener('click', () => { go(current + 1); resetAutoplay(); });
-    dots.forEach(dot => {
-      dot.addEventListener('click', () => { go(parseInt(dot.dataset.i)); resetAutoplay(); });
+    track.addEventListener('pointerdown', e => {
+      drag = { x: e.clientX, w: track.offsetWidth };
+      dx = 0; stopAuto();
+      track.setPointerCapture(e.pointerId);
     });
+    track.addEventListener('pointermove', e => {
+      if (!drag) return;
+      dx = e.clientX - drag.x;
+      setPos(dx, false);
+    });
+    function endDrag() {
+      if (!drag) return;
+      const t = drag.w * 0.15;
+      if (dx < -t) current = (current + 1) % total;
+      else if (dx > t) current = (current - 1 + total) % total;
+      drag = null; dx = 0;
+      setPos(0, true);
+      restart();
+    }
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
 
-    startAutoplay();
+    setPos(0, false);
+    restart();
   })();
 
   // Language selector
